@@ -1,0 +1,27 @@
+echo "Something is happening!" # always run
+
+[run] # run on `wr build`
+go run .
+
+[test]
+- echo test >> testfile # "-" means it's run async
+
+[build]
+# build for linux
+GOOS=linux GOARCH=amd64 go build -o build/linux-amd64/wr
+GOOS=linux GOARCH=arm64 go build -o build/linux-arm64/wr
+
+# build for mac
+- GOOS=darwin GOARCH=amd64 go build -o build/mac-amd64/wr 
+- GOOS=darwin GOARCH=arm64 go build -o build/mac-arm64/wr
+
+# build for windows
+GOOS=windows GOARCH=amd64 go build -o build/windows-amd64/wr.exe
+
+# build for freebsd
+- GOOS=freebsd GOARCH=amd64 go build -o build/freebsd-amd64/wr
+- GOOS=freebsd GOARCH=arm64 go build -o build/freebsd-arm64/wr
+
+
+
+
